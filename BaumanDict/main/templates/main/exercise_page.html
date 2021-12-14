@@ -1,0 +1,33 @@
+{% extends 'base/main_template.html' %}
+
+{% block title %}Exercises{% endblock %}
+
+{% block content %}
+
+<div class="card card-style mt-2 dict-card">
+    <div class="card-header text-center dict-card-header">
+      exercises
+    </div>
+    <div class="card-body ">
+      <div class="row" >
+    <div class="col-md-6" >
+      <a href="" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex1btn">Cards</a>
+      <a href="{% url 'exercise' %}?type=translate&lang=eng" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex2btn">Translate into English</a>
+      <a href="{% url 'exercise' %}?type=translate&lang=ru" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex3btn">Translate into Russian</a>
+    </div>
+    <div class="col-md-6" >
+      <a href="#" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex4btn">Choose English translation variant</a>
+      <a href="#" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex5btn">Choose Russian translation variant</a>
+      <a href="#" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex6btn">Fill in the blanks</a>
+    </div>
+  </div>
+    </div>
+</div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+

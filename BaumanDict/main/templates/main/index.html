@@ -1,0 +1,129 @@
+{% extends 'base/main_template.html' %}
+
+
+
+{% block title %}Bauman dict{% endblock %}
+{% block content %}
+<div class="card">
+<div class="card-header text-center dict-card-header">
+    Поиск по первой букве
+  </div>
+  <div class="card-body m-auto justify-content-center">
+
+      <table class="my-table">
+          <tr class="my-tr">
+              {% for letter in letters %}
+
+              <td class='my-td '>
+                  <a href="{% url "load-entry-list" %}?letter={{ letter }}"
+                     class='btn btn-outline-primary dict-btn bigfont col-12 letter'
+                  title="Показать только слова, начинающиеся на букву {{ letter }}"> {{ letter }} </a>
+              </td>
+
+              {% endfor %}
+          </tr>
+      </table>
+</div>
+</div>
+
+<!--<div class="card-header text-center dict-card-header">-->
+<!--    Поиск по первой букве-->
+<!--  </div>-->
+
+
+
+
+<div class="card">
+<div class="card-header text-center dict-card-header">
+  Поиск по модулю
+  </div>
+  <div class="card-body">
+
+      <div class="row">
+        <div class="col-md-6">
+
+            {% for img in imgs1 %}
+            <a href="{% url "load-entry-list" %}?module={{ img.1 }}"
+               class="btn btn-outline-primary btn-lg  col-12 dict-btn bigfont" role="button">
+                    <img class="module-img" src='../../static/{{ img.0 }}' alt="None"> Module {{ img.1 }}
+            </a>
+            {% endfor %}
+
+        </div>
+             <div class="col-md-6">
+
+                {% for img in imgs2 %}
+            <a href="{% url "load-entry-list" %}?module={{ img.1 }}"
+               class="btn btn-outline-primary btn-lg  col-12 dict-btn bigfont" role="button">
+                    <img class="module-img" src='../../static/{{ img.0 }}' alt="None"> Module {{ img.1 }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header text-center dict-card-header">
+  Все слова
+  </div>
+
+  <div class="card-body allEntries">
+              {% for entry in entries %}
+              <a href="{% url 'entry' %}?word={{ entry.word }}&module={{ entry.module }}"
+                 class='btn btn-outline-primary dict-btn col-12 align-text-left'>
+                  <b>{{ entry.word }}</b> - {{ entry.translation }} (module {{entry.module}})
+                </a>
+
+              {% endfor %}
+
+
+</div>
+
+
+  <button class="btn " id="load-more-entries">Load more entries</button>
+
+
+</div>
+<div style="display: none;" id="lastEntryIndexer" count="{{ lastEntryIndex }}"></div>
+
+
+    <script>
+
+
+    $('#load-more-entries').on('click', function (){
+        let lastEntryIndex = $('#lastEntryIndexer').attr('count')
+        let data = {
+            lastEntryIndex: lastEntryIndex
+        }
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            data: data,
+            url: '{% url "load-more-entries" %}',
+            success: function(data){
+                $('#lastEntryIndexer').attr('count', data['count'])
+                if(!data['moreEntries']){
+                    $('#load-more-entries').css('display', 'none')
+                }else{
+                    $.each(data['data'], function(key, obj){
+                        $('.allEntries').append(
+                            '<a href="{% url 'entry' %}?word='+obj['word']+'&module='+obj['module']+'"'+
+                             "class='btn btn-outline-primary dict-btn col-12 align-text-left'>"+
+                              "<b>"+obj['word']+"</b> - " + obj['translation'] +" (module"+ obj['module'] + ")"+
+                            '</a>'
+                        )
+                    })
+                }
+            }
+        })
+
+    })
+
+</script>
+
+{% endblock content %}
+
+
+
+

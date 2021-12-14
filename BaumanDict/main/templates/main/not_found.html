@@ -1,0 +1,19 @@
+{% extends 'base/main_template.html' %}
+
+
+
+{% block title %}"{{ word }}" not found...{% endblock %}
+
+
+
+{% block content %}
+    <div class="container pt-4" style="text-align: center">
+    <h1> 404 </h1>
+        <h3 > Entry Not Found </h3>
+
+        <p>We regret to inform you that the word <b>"{{ word }}"</b> of module <b>{{ module }}</b> you currently seek is nowhere to be found in our dictionary. Like, at all. Sorry.</p>
+    </div>
+
+
+
+{% endblock %}

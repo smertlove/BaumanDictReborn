@@ -1,0 +1,24 @@
+.nav-wrap{
+    background-color: #689CD3;
+}
+
+
+
+  .dict-btn{
+    background-color: #fff;
+    color: #000;
+    border: none;
+  }
+
+
+
+  .dict-btn:hover, .dict-btn-big:hover{
+    background-color: #689CD3;
+    /*background: linear-gradient(148deg, rgba(255,255,255,1) 0%, rgba(104,156,211,1) 100%);*/
+transition-duration: 350ms;
+  }
+
+  .dict-card-header{
+    background: #f9f7f0;
+   }
+

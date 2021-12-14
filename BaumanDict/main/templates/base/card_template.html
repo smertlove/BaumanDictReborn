@@ -1,0 +1,16 @@
+{% extends 'base/main_template.html' %}
+
+{% block title %}Bauman dict{% endblock %}
+{% block content %}
+
+
+<div class="card card-style mt-2 dict-card">
+    <div class="card-header text-center dict-card-header">
+      {% block cardhead %}{% endblock %}
+    </div>
+    <div class="card-body m-auto justify-content-center">
+      {% block cardbody %}{% endblock %}
+    </div>
+</div>
+
+{% endblock content %}

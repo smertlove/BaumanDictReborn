@@ -1,0 +1,20 @@
+{% extends 'base/card_template.html' %}
+
+{% block title %}list of entries{% endblock %}
+
+{% block cardhead %}
+
+<h2>{{ list_header }}</h2>
+{% endblock %}
+
+
+{% block cardbody %}
+{% for entry in data %}
+              <a href="{% url 'entry' %}?word={{ entry.word }}&module={{ entry.module }}"
+                 class='btn btn-outline-primary dict-btn col-12 align-text-left'>
+                  <b>{{ entry.word }}</b> - {{ entry.translation }} (module {{entry.module}})
+                </a>
+
+              {% endfor %}
+
+{% endblock %}
