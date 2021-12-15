@@ -16,9 +16,9 @@
       <a href="{% url 'exercise' %}?type=translate&lang=ru" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex3btn">Translate into Russian</a>
     </div>
     <div class="col-md-6" >
-      <a href="#" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex4btn">Choose English translation variant</a>
-      <a href="#" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex5btn">Choose Russian translation variant</a>
-      <a href="#" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex6btn">Fill in the blanks</a>
+      <a href="{% url 'exercise' %}?type=choose&lang=eng" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex4btn">Choose English translation variant</a>
+      <a href="{% url 'exercise' %}?type=choose&lang=ru" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex5btn">Choose Russian translation variant</a>
+      <a href="{% url 'exercise' %}?type=choose&spec=fill" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex6btn">Fill in the blanks</a>
     </div>
   </div>
     </div>

@@ -46,14 +46,9 @@ def live_search(request):
     if request.is_ajax():
 
         results = []
-        if len(pattern) > 1:
-            results = Entries.objects.filter(word__istartswith=pattern)
-        suggestions = [
-        {"word": entry.word, "module": entry.module}
-        for entry in results
-    ]
-        data = {'data': suggestions}
-        return JsonResponse(data)
+        if len(pattern) > 0:
+            results = services.live_search(pattern)
+        return JsonResponse({'data': results})
     else:
         return entry(request)
 
@@ -67,12 +62,12 @@ def live_search(request):
 def render_exercise_page(request):
     type = request.GET.get('type', 'card')
     lang = request.GET.get('lang', 'eng')
-    specification = request.GET.get('spec', 'choose')
+    print(type, lang)
+    specification = request.GET.get('spec', '')
     exercises = {
         'card': None,
         'translate': 'main/translate.html',
-        'choose': None,
-        'fill-blanks': None,
+        'choose': 'main/choose.html',
     }
     return render(request, exercises[type], {"lang": lang, "spec": specification})
 
@@ -83,12 +78,16 @@ def render_exercise_page(request):
 
 def get_translation_task(request):
     lang = request.GET.get('lang', 'eng')
+    print(request.GET)
     data = services.get_translation_task(lang)
     return JsonResponse(data)
 
 
-
-
+def get_choose_task(request):
+    lang = request.GET.get('lang', 'eng')
+    spec = request.GET.get('spec', '')
+    data = services.get_choose_task(lang, spec)
+    return JsonResponse(data)
 
 
 

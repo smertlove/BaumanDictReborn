@@ -1,5 +1,5 @@
 {% extends 'base/card_template.html' %}
-
+{% load static %}
 {% block title %}{{ entry.word }}{% endblock %}
 
 {% block cardhead %}
@@ -13,13 +13,13 @@
 
 <div class="wrapper">
     <p>{{ entry.transcription }}</p>
-    <input type="image" width="4%" src="../static/main/img/soundbutton.png" onclick="document.getElementById('audiotag').play();">
+    <input type="image" width="4%" src="{% static 'main/img/soundbutton.png' %}" onclick="document.getElementById('audiotag').play();">
 </div>
 
 <p>{{ eng|safe }}</p>
 <p>{{ ru|safe }}</p>
 
 </div>
-<audio id="audiotag" src="../static/main/audio/{{ entry.word }}.mp3"></audio>
+<audio id="audiotag" src="{% static 'main/audio/'%}{{ entry.word }}.mp3"></audio>
 
 {% endblock %}

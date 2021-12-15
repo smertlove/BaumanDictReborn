@@ -16,5 +16,7 @@
                 </a>
 
               {% endfor %}
-
+{% if data|length == 0 %}
+    <p>nothing here</p>
+    {% endif %}
 {% endblock %}

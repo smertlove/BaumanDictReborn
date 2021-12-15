@@ -1,12 +1,11 @@
 {% extends 'base/card_template.html' %}
-
+{% load static %}
 {% block cardhead %} Translate {% endblock %}
 
 
 {% block cardbody %}
 
-<p id="exercise">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna aliqua.</p>
+<p id="exercise"></p>
 <form class="form" id="answForm">
     <div class="input-group" id="submitAnsw">
       <input type="text" class="form-control" id="answer" autocomplete="off">
@@ -18,40 +17,27 @@
 
 
 
+{% endblock %}
+
+{% block scripts %}
+
+    <script type="text/javascript" src="{% static 'main/js/translate.js' %}"></script>
     <script>
+    var ajaxURL = '{% url "get-translate-task" %}';
+    var data = {"lang": "{{ lang }}"}
+    console.log(data)
 
-        var answer;
+    $(document).ready(getTask(ajaxURL, data));
+    $("#answForm").submit(function(){
+        checkAnsw();
+        getTask(ajaxURL, data);
+        return false;})
 
-        function getTask(){
-            $.ajax({
-            method: "GET",
-            dataType: "json",
-                data: {"lang": "{{ lang }}"},
-            url: '{% url "get-translate-task" %}',
-            success: function(data){
-                $('#exercise').empty().append(data['task']);
-                answer = data['answer']
-            }
-        })
-        }
-
-        $(document).ready(getTask());
-
-        $('#submit-answ').on('click', checkAnsw)
-        $("#answForm").submit(function(){checkAnsw(); return false;})
-
-        function checkAnsw (){
-
-            if ( answer.includes($('#answer').val()) ) {
-                alert('Great!');
-            } else {
-                alert('Wrong answer.\nCorrect: ' + answer)
-
-            }
-            getTask();
-            $('#answForm')[0].reset();
-        }
-
+    $('#submit-answ').on('click', function(){
+        checkAnsw();
+        getTask(ajaxURL, data);
+        return false;})
     </script>
 
 {% endblock %}
+

@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="{% static 'main/bootstrap-5.0.1/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/colors.css' %}">
-    <script src="{% static 'main/js/jquery 3.6.0.js' %}"></script>
-    <script src="{% static 'main/js/jquery-UI.js' %}"></script>
+
 <!--    ПОДКЛЮЧАЕТСЯ ТОЛЬКО В ХЕДЕ-->
 </head>
 
@@ -16,7 +15,7 @@
 <div class="my-footer-fixer">
 
 
-<div class="wrapper nav-wrap">
+<div class="wrapper nav-wrap sticky-top">
     <nav class="navbar navbar-expand-md navbar-light my-nav">
         <div class="d-flex justify-content-between mobile-width-100">
             <div class="fluid" id="search">
@@ -33,9 +32,9 @@
                     <span class="navbar-toggler-icon"></span>
           </button>
           </div>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="text-align: right;">
-            <a class="nav-link" style="color: #fff;" href="{% url 'index' %}">СЛОВАРЬ</a>
-            <a class="nav-link" style="color: #fff;" href="{% url 'exercises' %}">ТРЕНАЖЕР</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="">
+            <a class="nav-link my-nav-link"  href="{% url 'index' %}">СЛОВАРЬ</a>
+            <a class="nav-link my-nav-link"  href="{% url 'exercises' %}">ТРЕНАЖЕР</a>
         </div>
     </nav>
 </div>
@@ -45,6 +44,37 @@
 {% endblock %}
 
 
+
+
+
+
+
+
+
+
+<a href="#"  class="back-to-top-btn ">
+
+
+<div class="arrow-7">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>  <!--закрыт my-footer-fixer-->
 <footer class="text-center text-lg-start mt-5 my-footer"  >
     <div class="text-center p-4" > Copyright
@@ -52,72 +82,26 @@
 </footer>
 
 
-<script src="{% static 'main/bootstrap-5.0.1/js/bootstrap.js' %}"></script>
-
-
-
-
-<script>
-    document.getElementById('myInput').onclick = clearPreviouslySuggestedElements;
-    $('body').on('click', function(e){
-        if( e.target != document.getElementById('myInput') ) {
-		clearPreviouslySuggestedElements();
-		document.getElementById("myInput").value = "";
-        }
-    });
-
-        function clearPreviouslySuggestedElements(){
-  let mySuggestions = document.getElementById("mySuggestions");
-  let previouslySuggestedElements = mySuggestions.childNodes;
-  for (; previouslySuggestedElements.length > 0 ;) {
-    mySuggestions.removeChild(previouslySuggestedElements[0]);
-  }
-}
-
-          $('#myInput').on('keyup', function (){
-            let pattern = this.value;
-            data = {
-                pattern: pattern
-            }
-            $.ajax({
-            method: "GET",
-            dataType: "json",
-            data: data,
-            url: '{% url "live-search" %}',
-            success: function(data){
-                console.log(data)
-                clearPreviouslySuggestedElements();
-
-                    $.each(data['data'], function(key, obj){
-                        let link = document.createElement('a');
-                        link.className = 'suggestin-link';
-
-                        link.href = "{% url 'entry' %}?word=" +obj['word'] + '&module='+obj['module'];
-                        link.innerText = obj['word']
-                        $('#mySuggestions').append(
-                            link
-                        )
-                    })
-
-            }
-        })
-
-
-    })
-
-
-
-
-      </script>
-
-
-
-
 </body>
 
 
 
+<script src="{% static 'main/bootstrap-5.0.1/js/bootstrap.js' %}"></script>
+<script src="{% static 'main/js/jquery 3.6.0.js' %}"></script>
+<script src="{% static 'main/js/jquery-UI.js' %}"></script>
 
+<script type="text/javascript" src="{% static 'main/js/livesearch.js' %}"></script>
+<script>
+          $('#myInput').on('keyup', function (){
+            let pattern = this.value;
+            liveSearch("{% url "live-search" %}", "{% url 'entry' %}" , pattern);
+    })
+</script>
+
+<script type="text/javascript" src="{% static 'main/js/back-to-top-btn.js' %}"></script>
+
+{% block scripts %}
+{% endblock %}
 
 
 

@@ -1,6 +1,6 @@
 from .models import Entries
-from random import sample, choice
-
+from random import sample, choice, randint
+import re
 
 
 def get_card_head(**kwargs):
@@ -60,12 +60,13 @@ def get_entry_data(**kwargs):
 
 
 def live_search(pattern):
-    print(pattern)
     entries = []
-    if len(pattern)>2:
-        entries = list(Entries.objects.filter(word__isstartwith=pattern))
-    print(entries)
-    return entries
+    if len(pattern)>0:
+        entries = list(Entries.objects.filter(word__istartswith=pattern))
+    return [
+        {"word": entry.word, "module": entry.module}
+        for entry in entries
+    ]
 
 
 ################
@@ -84,9 +85,29 @@ def formate(data, sep):
 def get_translation_task(lang, modules='None'):
     data = choice(Entries.objects.all())
 
-    if lang == 'eng':
+    if lang == 'ru':
         ll= {'task': data.word, 'answer': formate(data.translation, ',')}
     else:
         ll= {'task': data.translation, 'answer': formate(data.word, ',')}
-    print(ll)
     return ll
+
+
+def get_choose_task(lang, spec, modules='None'):
+    pos = choice(('v', 'phr', 'n', 'adj', 'a', 'prep', 'n, v', 'adv', 'conj'))
+    entries = list(Entries.objects.filter(pos=pos))
+    answs = sample(entries, 4)
+    right_answ = answs[randint(0, 3)]
+    data = {}
+
+    if lang == 'eng':
+        data['right_answ'] = right_answ.word.strip()
+        data['task'] = right_answ.translation.strip()
+        data['answs'] = [entry.word.strip() for entry in answs]
+    else:
+        data['right_answ'] = right_answ.translation.strip()
+        data['task'] = right_answ.word.strip()
+        data['answs'] = [entry.translation.strip() for entry in answs]
+    if spec == 'fill':
+        data['task'] = re.sub(r'<<b>.*<d>>', '_'*5,  right_answ.getEng())
+    data['lang'] = lang
+    return data
