@@ -11,7 +11,7 @@
     <div class="card-body ">
       <div class="row" >
     <div class="col-md-6" >
-      <a href="" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex1btn">Cards</a>
+      <a href="{% url 'exercise' %}?type=card" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex1btn">Cards</a>
       <a href="{% url 'exercise' %}?type=translate&lang=eng" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex2btn">Translate into English</a>
       <a href="{% url 'exercise' %}?type=translate&lang=ru" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex3btn">Translate into Russian</a>
     </div>

@@ -29,6 +29,9 @@
     position: absolute;
     z-index: 10;
     min-width: 210px;
+    max-width: 210px;
+    max-height: 300px;
+    overflow-y: scroll;
   }
 
 #mySuggestions > a{
@@ -196,6 +199,50 @@ padding-left: 5%;
         opacity: 0;
     }
 }
+
+
+
+
+.flip-card {
+  text-align: center;
+  color: black;
+  width: 300px;
+  height: 300px;
+  transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+
+  transform-style: preserve-3d;
+
+  position: relative;
+  background-color: #fff;
+
+  text-align: center;
+  padding-top: 35%;
+
+}
+
+.flipper {
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-bottom: 10px;
+  perspective: 1000px;
+
+}
+
+#myCardContent{
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  font-size: 230%;
+}
+
+.flipper.flip .flip-card {
+  transform: rotateY(360deg);
+  -webkit-transform: rotateY(360deg);
+}
+
+
+
+
 
 
 

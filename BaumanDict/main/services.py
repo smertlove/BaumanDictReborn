@@ -16,8 +16,8 @@ def get_card_head(**kwargs):
 def get_initial_entries():
     entries = Entries.objects.all()[:20]
     data = {
-        'imgs1': [('main/img/' + str(c) + '.png', c) for c in range(1, 13, 2)],
-        'imgs2': [('main/img/' + str(c) + '.png', c) for c in range(2, 13, 2)],
+        'imgs1': [('main/img/' + str(c) + '.png', c) for c in range(1, 7)],
+        'imgs2': [('main/img/' + str(c) + '.png', c) for c in range(7, 13)],
         'entries': entries,
         'letters': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
         'lastEntryIndex': len(entries)
@@ -111,3 +111,8 @@ def get_choose_task(lang, spec, modules='None'):
         data['task'] = re.sub(r'<<b>.*<d>>', '_'*5,  right_answ.getEng())
     data['lang'] = lang
     return data
+
+
+def get_card():
+    entry = choice(Entries.objects.all())
+    return {'side1':entry.word, 'side2':entry.translation}

@@ -11,5 +11,6 @@ urlpatterns = [
     path('search', views.live_search, name='live-search'),
     path('exercise', views.render_exercise_page, name='exercise'),
     path('translate', views.get_translation_task, name='get-translate-task'),
-    path('choose', views.get_choose_task, name='get-choose-task')
+    path('choose', views.get_choose_task, name='get-choose-task'),
+    path('card', views.get_card, name='get-card')
 ]

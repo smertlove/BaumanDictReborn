@@ -65,7 +65,7 @@ def render_exercise_page(request):
     print(type, lang)
     specification = request.GET.get('spec', '')
     exercises = {
-        'card': None,
+        'card': 'main/card.html',
         'translate': 'main/translate.html',
         'choose': 'main/choose.html',
     }
@@ -90,6 +90,8 @@ def get_choose_task(request):
     return JsonResponse(data)
 
 
+def get_card(request):
+    return JsonResponse(services.get_card())
 
 
 
