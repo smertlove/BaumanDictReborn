@@ -1,0 +1,31 @@
+{% extends 'base/card_template.html' %}
+{% load static %}
+
+{% block cardhead %} Click the card to turn it over {% endblock %}
+
+
+{% block cardbody %}
+
+<div class="flipper" id="flipper" >
+    <div class="flip-card" id="myCard" style="background-color: #0a53be">
+        <div id="myCardContent">
+            some text
+        </div>
+    </div>
+</div>
+
+    <button id="get-new">hello world</button>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'main/js/card.js' %}"></script>
+    <script>
+
+    var ajaxURL = '{% url "get-card" %}';
+    $('#get-new').on('click', function(){ getCard(ajaxURL) })
+    $(document).ready(getCard(ajaxURL));
+    </script>
+
+{% endblock %}
