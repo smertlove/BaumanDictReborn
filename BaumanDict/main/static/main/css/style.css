@@ -214,10 +214,9 @@ padding-left: 5%;
   transform-style: preserve-3d;
 
   position: relative;
-  background-color: #fff;
+background-color: rgba(212, 212, 212, 0.55);
+display: table;
 
-  text-align: center;
-  padding-top: 35%;
 
 }
 
@@ -226,13 +225,16 @@ padding-left: 5%;
   padding-right: 0px;
   margin-bottom: 10px;
   perspective: 1000px;
-
+cursor: pointer;
 }
 
 #myCardContent{
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  font-size: 230%;
+  font-size: 170%;
+    display: table-cell;
+    vertical-align: middle;
+user-select: none;
 }
 
 .flipper.flip .flip-card {
