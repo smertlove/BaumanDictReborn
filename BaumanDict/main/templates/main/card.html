@@ -26,6 +26,18 @@
     var ajaxURL = '{% url "get-card" %}';
     $('#get-new').on('click', function(){ getCard(ajaxURL) })
     $(document).ready(getCard(ajaxURL));
+
+    document.addEventListener( 'keyup', event => {
+        if( event.code === 'Enter' ){
+            flip();
+        };
+        if (event.code === 'Space' ) {
+            getCard(ajaxURL
+            );
+        };
+      });
+
+
     </script>
 
 {% endblock %}
