@@ -8,8 +8,8 @@ class Entries(models.Model):
     translation = models.CharField('ru translation', max_length=100)
     transcription = models.CharField('eng transcription', max_length=50)
     pos = models.CharField('part of speech', max_length=5)
-    eng_example = models.CharField('eng example sentence', max_length=250)
-    ru_example = models.CharField('ru example sentence', max_length=250)
+    eng_example = models.TextField('eng example sentence', max_length=250)
+    ru_example = models.TextField('ru example sentence', max_length=250)
     module = models.IntegerField('module')
 
     def __str__(self):

@@ -19,7 +19,7 @@ function liveSearch(ajaxURL, aHrefURL, pattern){
             url: ajaxURL,
             success: function (data) {
                 clearPreviouslySuggestedElements();
-                if (data['data'].length == 0) {
+                if (data['data'].length == 0 && pattern.length>1) {
                     $('#mySuggestions').append(
                         '<p style="margin-left: 5px">nothing found</p>'
                     )

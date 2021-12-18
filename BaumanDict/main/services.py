@@ -1,4 +1,5 @@
 from .models import Entries
+from django.db.models import Q
 from random import sample, choice, randint
 import re
 
@@ -79,10 +80,24 @@ def live_search(pattern):
 
 
 
+
+def get_entries_of_specific_modules(allowed_modules):
+    q = Q(module=0)
+    for module in allowed_modules:
+        q |= Q(module=module)
+    return Entries.objects.filter(q)
+
+
+
+
+
+
+
+
 def formate(data, sep):
     return list(map(str.strip, data.split(sep)))
 
-def get_translation_task(lang, modules='None'):
+def get_translation_task(lang, allowed_modules = [1]):
     data = choice(Entries.objects.all())
 
     if lang == 'ru':

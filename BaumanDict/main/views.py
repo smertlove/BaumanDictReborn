@@ -25,7 +25,7 @@ def entry_list_load(request):
 
 
 def exercises(request):
-    return render(request, 'main/exercise_page.html')
+    return render(request, 'main/exercise_page.html', {'modules_num': range(1, 13)})
 
 
 def entry(request):

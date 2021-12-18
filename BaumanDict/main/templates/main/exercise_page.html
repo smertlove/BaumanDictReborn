@@ -1,5 +1,5 @@
 {% extends 'base/main_template.html' %}
-
+{% load static %}
 {% block title %}Exercises{% endblock %}
 
 {% block content %}
@@ -9,16 +9,40 @@
       exercises
     </div>
     <div class="card-body ">
+    <h3 class="text-center">choose modules</h3>
+        <div class="container table-wrapper">
+
+
+
+        <table class="my-table">
+          <tr class="my-tr">
+              {% for n in modules_num %}
+
+              <td class='my-td '>
+                  <button class="module-filter btn btn-outline-primary dict-btn bigfont col-12 letter" id="filter-{{ n }}"
+                  toggled="false">{{ n }}</button>
+              </td>
+
+              {% endfor %}
+          </tr>
+      </table>
+
+
+
+
+
+
+        </div>
       <div class="row" >
     <div class="col-md-6" >
-      <a href="{% url 'exercise' %}?type=card" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex1btn">Cards</a>
-      <a href="{% url 'exercise' %}?type=translate&lang=eng" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex2btn">Translate into English</a>
-      <a href="{% url 'exercise' %}?type=translate&lang=ru" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex3btn">Translate into Russian</a>
+      <a href="{% url 'exercise' %}?type=card&modules=1" class="btn btn-outline-primary btn-lg  col-12 dict-btn get-task" role="button" id="ex1btn">Cards</a>
+      <a href="{% url 'exercise' %}?type=translate&lang=eng&modules=1" class="btn btn-outline-primary btn-lg  col-12 dict-btn get-task" role="button" id="ex2btn">Translate into English</a>
+      <a href="{% url 'exercise' %}?type=translate&lang=ru&modules=1" class="btn btn-outline-primary btn-lg  col-12 dict-btn get-task" role="button" id="ex3btn">Translate into Russian</a>
     </div>
     <div class="col-md-6" >
-      <a href="{% url 'exercise' %}?type=choose&lang=eng" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex4btn">Choose English translation variant</a>
-      <a href="{% url 'exercise' %}?type=choose&lang=ru" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex5btn">Choose Russian translation variant</a>
-      <a href="{% url 'exercise' %}?type=choose&spec=fill" class="btn btn-outline-primary btn-lg  col-12 dict-btn" role="button" id="ex6btn">Fill in the blanks</a>
+      <a href="{% url 'exercise' %}?type=choose&lang=eng&modules=1" class="btn btn-outline-primary btn-lg  col-12 dict-btn get-task" role="button" id="ex4btn">Choose English translation variant</a>
+      <a href="{% url 'exercise' %}?type=choose&lang=ru&modules=1" class="btn btn-outline-primary btn-lg  col-12 dict-btn get-task" role="button" id="ex5btn">Choose Russian translation variant</a>
+      <a href="{% url 'exercise' %}?type=choose&spec=fill&modules=1" class="btn btn-outline-primary btn-lg  col-12 dict-btn get-task" role="button" id="ex6btn">Fill in the blanks</a>
     </div>
   </div>
     </div>
@@ -29,5 +53,7 @@
 {% endblock %}
 
 
-
+{% block scripts %}
+    <script src="{% static 'main/js/exercise_filter.js' %}"></script>
+{% endblock %}
 
